@@ -89,14 +89,13 @@ model Utility {
 }
 
 model UtilityCollection {
-  utilityCollectonId String    @id @default(uuid())
-  teamCode           TeamCode
-  team               Teams     @relation(fields: [teamCode], references: [teamCode])
-  plantCode          PlantCode
-  plant              Plants    @relation(fields: [plantCode], references: [plantCode])
-  mapCode            MapCode
-  map                Maps      @relation(fields: [mapCode], references: [mapCode])
-
+  utilityCollectonId    String                  @id @default(uuid())
+  teamCode              TeamCode
+  team                  Teams                   @relation(fields: [teamCode], references: [teamCode])
+  plantCode             PlantCode
+  plant                 Plants                  @relation(fields: [plantCode], references: [plantCode])
+  mapCode               MapCode
+  map                   Maps                    @relation(fields: [mapCode], references: [mapCode])
   utilitiesInCollection UtilitiesInCollection[]
 }
 
