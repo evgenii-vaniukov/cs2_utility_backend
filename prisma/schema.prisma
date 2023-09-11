@@ -35,10 +35,10 @@ enum MapCode {
 }
 
 model Maps {
-  mapCode           MapCode             @id
-  mapName           String              @unique @db.VarChar(20)
-  mapPositions      MapPositions[]
-  UtilityCollection UtilityCollection[]
+  mapCode            MapCode             @id
+  mapName            String              @unique @db.VarChar(20)
+  mapPositions       MapPositions[]
+  utilityCollections UtilityCollection[]
 }
 
 enum TeamCode {
@@ -58,10 +58,10 @@ enum PlantCode {
 }
 
 model Plants {
-  plantCode         PlantCode           @id
-  plantName         String              @unique @db.VarChar(10)
-  utilities         Utility[]
-  UtilityCollection UtilityCollection[]
+  plantCode          PlantCode           @id
+  plantName          String              @unique @db.VarChar(10)
+  utilities          Utility[]
+  utilityCollections UtilityCollection[]
 }
 
 model MapPositions {
