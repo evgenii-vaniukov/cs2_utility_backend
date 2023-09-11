@@ -10,17 +10,92 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model UtilityCollection {
-  id          String    @id @default(uuid())
-  name        String
-  description String?
-  utilities   Utility[]
+enum GrenadeTypeCode {
+  FLASH
+  SMOKE
+  MOLOTOV
+  DECOY
+  HE
+}
+
+model GrenadeTypes {
+  grenadeTypeCode GrenadeTypeCode @id
+  grenadeTypeName String          @unique @db.VarChar(10)
+  Utility         Utility[]
+}
+
+enum MapCode {
+  DE_INFERNO
+  DE_NUKE
+  DE_MIRAGE
+  DE_OVERPASS
+  DE_VERTIGO
+  DE_ANUBIS
+  DE_ANCIENT
+}
+
+model Maps {
+  mapCode           MapCode             @id
+  mapName           String              @unique @db.VarChar(20)
+  mapPositions      MapPositions[]
+  UtilityCollection UtilityCollection[]
+}
+
+enum TeamCode {
+  T_SIDE
+  CT_SIDE
+}
+
+model Teams {
+  teamCode           TeamCode            @id
+  team_name          String              @unique @db.VarChar(20)
+  utilityCollections UtilityCollection[]
+}
+
+enum PlantCode {
+  A
+  B
+}
+
+model Plants {
+  plantCode         PlantCode           @id
+  plantName         String              @unique @db.VarChar(10)
+  utilities         Utility[]
+  UtilityCollection UtilityCollection[]
+}
+
+model MapPositions {
+  positionId   String    @id @default(uuid())
+  mapCode      MapCode
+  map          Maps      @relation(fields: [mapCode], references: [mapCode])
+  positionName String    @db.VarChar(20)
+  utilities    Utility[]
 }
 
 model Utility {
-  id                  String            @id @default(uuid())
-  name                String
-  description         String?
-  utilityCollectionId String
-  utilityCollection   UtilityCollection @relation(fields: [utilityCollectionId], references: [id])
+  utilityId          String              @id @default(uuid())
+  label              String              @db.VarChar(255)
+  fromPositionId     String
+  fromPosition       MapPositions        @relation(fields: [fromPositionId], references: [positionId])
+  toPositionId       String
+  grenadeTypeCode    GrenadeTypeCode
+  grenadeType        GrenadeTypes        @relation(fields: [grenadeTypeCode], references: [grenadeTypeCode])
+  plantCode          PlantCode
+  plant              Plants              @relation(fields: [plantCode], references: [plantCode])
+  throwing           String
+  landing            String
+  crosshairAlignment String
+  utilityCollections UtilityCollection[]
+}
+
+model UtilityCollection {
+  utilityCollectonId String    @id @default(uuid())
+  teamCode           TeamCode
+  team               Teams     @relation(fields: [teamCode], references: [teamCode])
+  utilityId          String
+  utility            Utility   @relation(fields: [utilityId], references: [utilityId])
+  plantCode          PlantCode
+  plant              Plants    @relation(fields: [plantCode], references: [plantCode])
+  mapCode            MapCode
+  map                Maps      @relation(fields: [mapCode], references: [mapCode])
 }
