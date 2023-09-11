@@ -9,3 +9,18 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model UtilityCollection {
+  id          String    @id @default(uuid())
+  name        String
+  description String?
+  utilities   Utility[]
+}
+
+model Utility {
+  id                  String            @id @default(uuid())
+  name                String
+  description         String?
+  utilityCollectionId String
+  utilityCollection   UtilityCollection @relation(fields: [utilityCollectionId], references: [id])
+}
