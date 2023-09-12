@@ -73,37 +73,28 @@ model MapPositions {
 }
 
 model Utility {
-  utilityId             String                  @id @default(uuid())
-  label                 String                  @db.VarChar(255)
-  fromPositionId        String
-  fromPosition          MapPositions            @relation(fields: [fromPositionId], references: [positionId])
-  toPositionId          String
-  grenadeTypeCode       GrenadeTypeCode
-  grenadeType           GrenadeTypes            @relation(fields: [grenadeTypeCode], references: [grenadeTypeCode])
-  plantCode             PlantCode
-  plant                 Plants                  @relation(fields: [plantCode], references: [plantCode])
-  throwing              String
-  landing               String
-  crosshairAlignment    String
-  utilitiesInCollection UtilitiesInCollection[]
+  utilityId              String              @id @default(uuid())
+  label                  String              @db.VarChar(255)
+  fromPositionId         String
+  fromPosition           MapPositions        @relation(fields: [fromPositionId], references: [positionId])
+  toPositionId           String
+  grenadeTypeCode        GrenadeTypeCode
+  grenadeType            GrenadeTypes        @relation(fields: [grenadeTypeCode], references: [grenadeTypeCode])
+  plantCode              PlantCode
+  plant                  Plants              @relation(fields: [plantCode], references: [plantCode])
+  throwing               String
+  landing                String
+  crosshairAlignment     String
+  utilitiesInCollections UtilityCollection[]
 }
 
 model UtilityCollection {
-  utilityCollectonId    String                  @id @default(uuid())
-  teamCode              TeamCode
-  team                  Teams                   @relation(fields: [teamCode], references: [teamCode])
-  plantCode             PlantCode
-  plant                 Plants                  @relation(fields: [plantCode], references: [plantCode])
-  mapCode               MapCode
-  map                   Maps                    @relation(fields: [mapCode], references: [mapCode])
-  utilitiesInCollection UtilitiesInCollection[]
-}
-
-model UtilitiesInCollection {
-  utilityId          String
-  utility            Utility           @relation(fields: [utilityId], references: [utilityId])
-  utilityCollectonId String
-  utilityCollection  UtilityCollection @relation(fields: [utilityCollectonId], references: [utilityCollectonId])
-
-  @@id([utilityId, utilityCollectonId])
+  utilityCollectonId String    @id @default(uuid())
+  teamCode           TeamCode
+  team               Teams     @relation(fields: [teamCode], references: [teamCode])
+  plantCode          PlantCode
+  plant              Plants    @relation(fields: [plantCode], references: [plantCode])
+  mapCode            MapCode
+  map                Maps      @relation(fields: [mapCode], references: [mapCode])
+  utilities          Utility[]
 }
