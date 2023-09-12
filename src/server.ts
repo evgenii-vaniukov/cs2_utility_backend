@@ -1,5 +1,6 @@
 import express from "express";
-import router from "./utility_collections/collections.router";
+import utilities_router from "./grenades/router";
+import utility_collections_router from "./utility_collections/router";
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.use("/utilitycollections", router);
+app.use("/utilitycollections", utility_collections_router);
+app.use("/utilities", utilities_router);
 
 export default app;

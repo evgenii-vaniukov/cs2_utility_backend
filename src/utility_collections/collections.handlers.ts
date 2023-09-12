@@ -1,4 +1,4 @@
-import prisma from "../../db";
+import prisma from "../db";
 
 export const getUtilityCollections = async (req, res) => {
   const utilityCollections = await prisma.utilityCollection.findMany();
