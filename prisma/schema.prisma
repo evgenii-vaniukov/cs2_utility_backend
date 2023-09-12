@@ -73,19 +73,19 @@ model MapPositions {
 }
 
 model Utility {
-  utilityId              String              @id @default(uuid())
-  label                  String              @db.VarChar(255)
-  fromPositionId         String
-  fromPosition           MapPositions        @relation(fields: [fromPositionId], references: [positionId])
-  toPositionId           String
-  grenadeTypeCode        GrenadeTypeCode
-  grenadeType            GrenadeTypes        @relation(fields: [grenadeTypeCode], references: [grenadeTypeCode])
-  plantCode              PlantCode
-  plant                  Plants              @relation(fields: [plantCode], references: [plantCode])
-  throwing               String
-  landing                String
-  crosshairAlignment     String
-  utilitiesInCollections UtilityCollection[]
+  utilityId          String              @id @default(uuid())
+  label              String              @db.VarChar(255)
+  fromPositionId     String
+  fromPosition       MapPositions        @relation(fields: [fromPositionId], references: [positionId])
+  toPositionId       String
+  grenadeTypeCode    GrenadeTypeCode
+  grenadeType        GrenadeTypes        @relation(fields: [grenadeTypeCode], references: [grenadeTypeCode])
+  plantCode          PlantCode
+  plant              Plants              @relation(fields: [plantCode], references: [plantCode])
+  throwing           String
+  landing            String
+  crosshairAlignment String
+  utilityCollections UtilityCollection[]
 }
 
 model UtilityCollection {
