@@ -90,6 +90,8 @@ model Utility {
 
 model UtilityCollection {
   utilityCollectonId String    @id @default(uuid())
+  thumbnail          String    @default("pending")
+  label              String    @default("pending")
   teamCode           TeamCode
   team               Teams     @relation(fields: [teamCode], references: [teamCode])
   plantCode          PlantCode
