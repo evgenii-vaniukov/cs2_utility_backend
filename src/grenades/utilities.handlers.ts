@@ -1,14 +1,6 @@
 import prisma from "../db";
 
-export const getUtilitiesFromCollection = async (req, res) => {
-  const utilities = await prisma.utility.findMany({
-    where: {
-      utilityCollections: {
-        some: {
-          utilityCollectonId: req.params.collectionId,
-        },
-      },
-    },
-  });
+export const getUtilities = async (req, res) => {
+  const utilities = await prisma.utility.findMany();
   res.json({data: utilities});
 };

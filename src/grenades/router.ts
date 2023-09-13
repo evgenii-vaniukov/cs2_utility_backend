@@ -1,8 +1,8 @@
 import {Router} from "express";
-import {getUtilitiesFromCollection} from "./utilities.handlers";
+import {getUtilities} from "./utilities.handlers";
 
 const utilities_router = Router();
 
-utilities_router.get("/:collectionId", getUtilitiesFromCollection);
+utilities_router.get("/", getUtilities);
 
 export default utilities_router;
