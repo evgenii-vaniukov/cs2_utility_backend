@@ -74,6 +74,7 @@ model MapPositions {
 
 model Utility {
   utilityId          String              @id @default(uuid())
+  createdAt          DateTime            @default(now())
   label              String              @db.VarChar(255)
   fromPositionId     String
   fromPosition       MapPositions        @relation(fields: [fromPositionId], references: [positionId])
@@ -90,6 +91,7 @@ model Utility {
 
 model UtilityCollection {
   utilityCollectonId String    @id @default(uuid())
+  createdAt          DateTime  @default(now())
   thumbnail          String    @default("pending")
   label              String    @default("pending")
   teamCode           TeamCode
