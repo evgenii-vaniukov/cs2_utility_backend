@@ -72,37 +72,20 @@ model MapPositions {
   utilities    Utility[]
 }
 
-enum Precision {
-  IMPORTANT
-  NOT_IMPORTANT
-}
-
-enum Bind {
-  NONE
-  JUMPTHROW
-  RUNTHROW
-}
-
 model Utility {
-  utilityId                     String          @id @default(uuid())
-  createdAt                     DateTime        @default(now())
-  label                         String          @db.VarChar(255)
-  description                   String          @default("") @db.VarChar(255)
-  fromPositionId                String
-  fromPosition                  MapPositions    @relation(fields: [fromPositionId], references: [positionId])
-  toPositionId                  String
-  grenadeTypeCode               GrenadeTypeCode
-  grenadeType                   GrenadeTypes    @relation(fields: [grenadeTypeCode], references: [grenadeTypeCode])
-  plantCode                     PlantCode
-  plant                         Plants          @relation(fields: [plantCode], references: [plantCode])
-  throwing                      String
-  landing                       String
-  crosshairAlignment            String
-  positionAlignment             String          @default("pending")
-  precisionOfCrosshairAlignment Precision       @default(IMPORTANT)
-  precisionOPosition            Precision       @default(IMPORTANT)
-  bind                          Bind            @default(NONE)
-
+  utilityId          String              @id @default(uuid())
+  createdAt          DateTime            @default(now())
+  label              String              @db.VarChar(255)
+  fromPositionId     String
+  fromPosition       MapPositions        @relation(fields: [fromPositionId], references: [positionId])
+  toPositionId       String
+  grenadeTypeCode    GrenadeTypeCode
+  grenadeType        GrenadeTypes        @relation(fields: [grenadeTypeCode], references: [grenadeTypeCode])
+  plantCode          PlantCode
+  plant              Plants              @relation(fields: [plantCode], references: [plantCode])
+  throwing           String
+  landing            String
+  crosshairAlignment String
   utilityCollections UtilityCollection[]
 }
 
