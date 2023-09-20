@@ -14,11 +14,11 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+app.use("/utilitycollections", utility_collections_router);
+app.use("/utilities", utilities_router);
+
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
-
-app.use("/utilitycollections", utility_collections_router);
-app.use("/utilities", utilities_router);
 
 export default app;
