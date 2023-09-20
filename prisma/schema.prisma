@@ -35,10 +35,11 @@ enum MapCode {
 }
 
 model Maps {
-  mapCode            MapCode             @id
-  mapName            String              @unique @db.VarChar(100)
-  mapPositions       MapPositions[]
-  utilityCollections UtilityCollection[]
+  mapCode      MapCode        @id
+  mapName      String         @unique @db.VarChar(100)
+  mapPositions MapPositions[]
+
+  UtilityCollection UtilityCollection[]
 }
 
 enum TeamCode {
@@ -99,15 +100,16 @@ model Utility {
 }
 
 model UtilityCollection {
-  utilityCollectonId String    @id @default(uuid())
-  createdAt          DateTime  @default(now())
-  thumbnail          String    @default("pending")
-  label              String    @default("")
+  utilityCollectonId String            @id @default(uuid())
+  createdAt          DateTime          @default(now())
+  thumbnail          String            @default("pending")
+  label              String            @default("")
   teamCode           TeamCode
-  team               Teams     @relation(fields: [teamCode], references: [teamCode])
+  team               Teams             @relation(fields: [teamCode], references: [teamCode])
   plantCode          PlantCode
-  plant              Plants    @relation(fields: [plantCode], references: [plantCode])
+  plant              Plants            @relation(fields: [plantCode], references: [plantCode])
   mapCode            MapCode
-  map                Maps      @relation(fields: [mapCode], references: [mapCode])
+  map                Maps              @relation(fields: [mapCode], references: [mapCode])
+  utilitiesOrder     GrenadeTypeCode[] @default([])
   utilities          Utility[]
 }

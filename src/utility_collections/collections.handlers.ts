@@ -15,5 +15,8 @@ export const getCollectionDetails = async (req, res) => {
       utilities: true,
     },
   });
-  res.json({data: collection.utilities});
+  res.json({
+    data: collection.utilities,
+    utilitiesOrder: collection.utilitiesOrder,
+  });
 };
