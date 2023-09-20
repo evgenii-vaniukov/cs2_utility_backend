@@ -68,7 +68,7 @@ model MapPositions {
   positionId   String    @id @default(uuid())
   mapCode      MapCode
   map          Maps      @relation(fields: [mapCode], references: [mapCode])
-  positionName String    @db.VarChar(20)
+  positionName String    @db.VarChar(100)
   utilities    Utility[]
 }
 
