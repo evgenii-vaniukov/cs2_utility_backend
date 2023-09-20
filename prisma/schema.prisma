@@ -20,7 +20,7 @@ enum GrenadeTypeCode {
 
 model GrenadeTypes {
   grenadeTypeCode GrenadeTypeCode @id
-  grenadeTypeName String          @unique @db.VarChar(10)
+  grenadeTypeName String          @unique @db.VarChar(20)
   Utility         Utility[]
 }
 
@@ -36,7 +36,7 @@ enum MapCode {
 
 model Maps {
   mapCode            MapCode             @id
-  mapName            String              @unique @db.VarChar(20)
+  mapName            String              @unique @db.VarChar(100)
   mapPositions       MapPositions[]
   utilityCollections UtilityCollection[]
 }
@@ -93,7 +93,7 @@ model Utility {
   throwing           String
   landing            String
   crosshairAlignment String
-  positionAlignment  String              @default("pending")
+  positionAlignment  String              @default("")
   bind               Bind                @default(NONE)
   utilityCollections UtilityCollection[]
 }
@@ -102,7 +102,7 @@ model UtilityCollection {
   utilityCollectonId String    @id @default(uuid())
   createdAt          DateTime  @default(now())
   thumbnail          String    @default("pending")
-  label              String    @default("pending")
+  label              String    @default("")
   teamCode           TeamCode
   team               Teams     @relation(fields: [teamCode], references: [teamCode])
   plantCode          PlantCode
