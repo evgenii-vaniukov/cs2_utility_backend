@@ -97,6 +97,7 @@ model Utility {
   positionAlignment  String              @default("")
   bind               Bind                @default(NONE)
   utilityCollections UtilityCollection[]
+  mapCode            MapCode             @default(DE_INFERNO)
 }
 
 model UtilityCollection {
